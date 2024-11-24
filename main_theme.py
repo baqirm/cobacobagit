@@ -40,7 +40,7 @@ def write_csv(file_path, data, headers):
 # Fungsi untuk menerapkan tema
 def apply_theme(theme):
     if theme == "Default":
-        root.configure(bg="#f0f0f0")  # Update latar belakang utama
+        root.configure(bg="#f0f0f0")
         style.configure("TFrame", background="#f0f0f0")
         style.configure("TLabel", background="#f0f0f0", foreground="black")
         style.configure("TButton", background="#d9d9d9", foreground="black")
@@ -54,6 +54,22 @@ def apply_theme(theme):
         style.configure("TFrame", background="#ffffff")
         style.configure("TLabel", background="#ffffff", foreground="black")
         style.configure("TButton", background="#e0e0e0", foreground="black")
+    elif theme == "Coquette Mode":
+        root.configure(bg="#FDE8E8")  # Background Utama
+        style.configure("TFrame", background="#FFF1F1")  # Background Frame
+        style.configure("TLabel", background="#FFF1F1", foreground="#8B5E83")  # Label
+        style.configure("TButton", background="#FADADD", foreground="black")  # Button
+    elif theme == "Earth Mode":
+        root.configure(bg="#D7CCC8")  # Background Utama
+        style.configure("TFrame", background="#F5F5F5")  # Background Frame
+        style.configure("TLabel", background="#F5F5F5", foreground="#5D4037")  # Label
+        style.configure("TButton", background="#A1887F", foreground="black")  # Button
+    elif theme == "Sky Mode":
+        root.configure(bg="#BBDEFB")  # Background Utama
+        style.configure("TFrame", background="#E3F2FD")  # Background Frame
+        style.configure("TLabel", background="#E3F2FD", foreground="#0D47A1")  # Label
+        style.configure("TButton", background="#64B5F6", foreground="black")  # Button
+
     # Refresh frame
     clear_frame()
     show_home()
@@ -173,7 +189,7 @@ def show_home():
     ttk.Label(root, text="Pilih Tema", font=("Arial", 18)).pack(pady=10)
 
     global theme_combobox
-    theme_combobox = ttk.Combobox(root, values=["Default", "Dark Mode", "Light Mode"])
+    theme_combobox = ttk.Combobox(root, values=["Default", "Dark Mode", "Light Mode", "Earth Mode", "Coquette Mode", "Sky Mode"])
     theme_combobox.set("Default")
     theme_combobox.pack(pady=10)
     theme_combobox.bind("<<ComboboxSelected>>", lambda event: apply_theme(theme_combobox.get()))
