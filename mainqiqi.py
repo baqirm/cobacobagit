@@ -62,16 +62,12 @@ def apply_theme(theme):
     # Refresh frame
     clear_frame()
     show_home()
+    # Perbarui tampilan
+    root.update()
     
     # Tampilkan gambar tema
     image_label = ttk.Label(root, image=theme_image)
     image_label.pack(pady=10)
-
-    # Refresh frame
-    clear_frame()
-    show_home()
-    # Perbarui tampilan
-    root.update()
 
 def change_theme(event):
     """Callback untuk mengubah tema saat pengguna memilih tema baru."""
@@ -180,8 +176,8 @@ def show_home():
     clear_frame()
 
     ttk.Label(root, text="Aplikasi Pengelolaan Uang", font=("Jokerman", 72)).pack(pady=20)
-    ttk.Button(root, text="Sign Up", command=sign_up, font=).pack(pady=10)
-    ttk.Button(root, text="Sign In", command=sign_in, font=).pack(pady=10)
+    ttk.Button(root, text="Sign Up", command=sign_up).pack(pady=10)
+    ttk.Button(root, text="Sign In", command=sign_in).pack(pady=10)
 
     ttk.Label(root, text="Pilih Tema", font=("Arial", 18)).pack(pady=10)
 
