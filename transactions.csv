@@ -3,3 +3,5 @@ id,username,type,description,amount,date
 2,1,Expense,jajan,100000.0,2024-11-01
 3,1,Income,gaji,50000000.0,2024-11-01
 4,anggrek,Income,jajan,50000.0,2021-11-22
+5,qiqiimut,Income,jual mi ayam,10.0,2024/11/25
+6,qiqiimut,Expense,beli nutrisari,4000.0,2024/11/25
