@@ -38,6 +38,38 @@ def write_csv(file_path, data, headers):
         writer.writerows(data)
         
 # Fungsi untuk menerapkan tema
+def apply_theme(theme):
+    if theme == "Default":
+        root.configure(bg="#f0f0f0")
+        style.configure("TFrame", background="#f0f0f0")
+        style.configure("TLabel", background="#f0f0f0", foreground="black")
+        style.configure("TButton", background="#d9d9d9", foreground="black")
+    elif theme == "Dark Mode":
+        root.configure(bg="#2c2c2c")
+        style.configure("TFrame", background="#2c2c2c")
+        style.configure("TLabel", background="#2c2c2c", foreground="white")
+        style.configure("TButton", background="#444444", foreground="black")
+    elif theme == "Light Mode":
+        root.configure(bg="#ffffff")
+        style.configure("TFrame", background="#ffffff")
+        style.configure("TLabel", background="#ffffff", foreground="black")
+        style.configure("TButton", background="#e0e0e0", foreground="black")
+    elif theme == "Coquette Mode":
+        root.configure(bg="#FDE8E8")  # Background Utama
+        style.configure("TFrame", background="#FFF1F1")  # Background Frame
+        style.configure("TLabel", background="#FFF1F1", foreground="#8B5E83")  # Label
+        style.configure("TButton", background="#FADADD", foreground="black")  # Button
+    elif theme == "Earth Mode":
+        root.configure(bg="#D7CCC8")  # Background Utama
+        style.configure("TFrame", background="#F5F5F5")  # Background Frame
+        style.configure("TLabel", background="#F5F5F5", foreground="#5D4037")  # Label
+        style.configure("TButton", background="#A1887F", foreground="black")  # Button
+    elif theme == "Sky Mode":
+        root.configure(bg="#BBDEFB")  # Background Utama
+        style.configure("TFrame", background="#E3F2FD")  # Background Frame
+        style.configure("TLabel", background="#E3F2FD", foreground="#0D47A1")  # Label
+        style.configure("TButton", background="#64B5F6", foreground="black")  # Button
+
 # Fungsi untuk menerapkan tema
 def apply_theme(theme):
     global theme_image  # Menyimpan referensi gambar
