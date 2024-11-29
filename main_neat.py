@@ -8,6 +8,7 @@ current_user = None
 def logout():
     global current_user
     current_user = None
+    messagebox.showinfo("Logout", "Anda berhasil logout")
     show_home()
 
 def sign_up_user():
@@ -158,6 +159,10 @@ def show_home():
     theme_combobox.bind("<<ComboboxSelected>>", lambda event: apply_theme(theme_combobox.get()))
 
     ttk.Button(root, text="Ubah Tema", command=lambda: apply_theme(theme_combobox.get())).pack(pady=10)
+    
+def change_theme(event):
+    selected_theme = theme_combobox.get()
+    apply_theme(selected_theme)
 
 def apply_theme(theme):
     if theme == "Default":

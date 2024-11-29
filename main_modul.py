@@ -163,6 +163,11 @@ def show_home():
     theme_combobox.bind("<<ComboboxSelected>>", lambda event: apply_theme(theme_combobox.get()))
 
     ttk.Button(root, text="Ubah Tema", command=lambda: apply_theme(theme_combobox.get())).pack(pady=10)
+
+def change_theme(event):
+    """Callback untuk mengubah tema saat pengguna memilih tema baru."""
+    selected_theme = theme_combobox.get()
+    apply_theme(selected_theme)
     
 # Fungsi untuk menerapkan tema
 def apply_theme(theme):
@@ -202,12 +207,6 @@ def apply_theme(theme):
     show_home()
     # Perbarui tampilan
     root.update()
-
-def change_theme(event):
-    """Callback untuk mengubah tema saat pengguna memilih tema baru."""
-    selected_theme = theme_combobox.get()
-    apply_theme(selected_theme)
-    show_home()  # Refresh tampilan utama
 
 # Inisialisasi aplikasi
 root = tk.Tk()
