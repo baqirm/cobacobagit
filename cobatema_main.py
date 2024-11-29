@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import csv
 import os
+import users as us
+import transactions as ts
 
 # File CSV untuk penyimpanan data
 USER_FILE = "users.csv"
@@ -56,51 +58,25 @@ def apply_theme(theme):
         style.configure("TButton", background="#e0e0e0", foreground="black")
     elif theme == "Coquette Mode":
         root.configure(bg="#FDE8E8")  # Background Utama
-        style.configure("TFrame", background="#FFF1F1")  # Background Frame
-        style.configure("TLabel", background="#FFF1F1", foreground="#8B5E83")  # Label
+        style.configure("TFrame", background="#FDE8E8")  # Background Frame
+        style.configure("TLabel", background="#FDE8E8", foreground="#8B5E83")  # Label
         style.configure("TButton", background="#FADADD", foreground="black")  # Button
     elif theme == "Earth Mode":
         root.configure(bg="#D7CCC8")  # Background Utama
-        style.configure("TFrame", background="#F5F5F5")  # Background Frame
-        style.configure("TLabel", background="#F5F5F5", foreground="#5D4037")  # Label
+        style.configure("TFrame", background="#D7CCC8")  # Background Frame
+        style.configure("TLabel", background="#D7CCC8", foreground="#5D4037")  # Label
         style.configure("TButton", background="#A1887F", foreground="black")  # Button
     elif theme == "Sky Mode":
         root.configure(bg="#BBDEFB")  # Background Utama
-        style.configure("TFrame", background="#E3F2FD")  # Background Frame
-        style.configure("TLabel", background="#E3F2FD", foreground="#0D47A1")  # Label
+        style.configure("TFrame", background="#BBDEFB")  # Background Frame
+        style.configure("TLabel", background="#BBDEFB", foreground="#0D47A1")  # Label
         style.configure("TButton", background="#64B5F6", foreground="black")  # Button
-
-# Fungsi untuk menerapkan tema
-def apply_theme(theme):
-    global theme_image  # Menyimpan referensi gambar
-    if theme == "Default":
-        root.configure(bg="#f0f0f0")
-        theme_image = tk.PhotoImage(file="default_theme.png")  # Ganti dengan path gambar Anda
-    elif theme == "Dark Mode":
-        root.configure(bg="#2c2c2c")
-        theme_image = tk.PhotoImage(file="dark_mode_theme.png")  # Ganti dengan path gambar Anda
-    elif theme == "Light Mode":
-        root.configure(bg="#ffffff")
-        theme_image = tk.PhotoImage(file="light_mode_theme.png")  # Ganti dengan path gambar Anda
-    elif theme == "Coquette Mode":
-        root.configure(bg="#FDE8E8")
-        theme_image = tk.PhotoImage(file="coquette_mode_theme.png")  # Ganti dengan path gambar Anda
-    elif theme == "Earth Mode":
-        root.configure(bg="#D7CCC8")
-        theme_image = tk.PhotoImage(file="earth_mode_theme.png")  # Ganti dengan path gambar Anda
-    elif theme == "Sky Mode":
-        root.configure(bg="#BBDEFB")
-        theme_image = tk.PhotoImage(file="sky_mode_theme.png")  # Ganti dengan path gambar Anda
 
     # Refresh frame
     clear_frame()
     show_home()
     # Perbarui tampilan
     root.update()
-    
-    # Tampilkan gambar tema
-    image_label = ttk.Label(root, image=theme_image)
-    image_label.pack(pady=10)
 
 def change_theme(event):
     """Callback untuk mengubah tema saat pengguna memilih tema baru."""
