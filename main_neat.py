@@ -1,9 +1,20 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from PIL import Image, ImageTk
 import users as us
 import transactions as ts
 
 current_user = None
+
+# Inisialisasi aplikasi
+root = tk.Tk()
+root.title("Aplikasi Pengelolaan Uang")
+root.geometry("800x600")  # Sesuaikan ukuran jendela
+
+# Membuat Canvas untuk gambar latar
+background = tk.Canvas(root, width=800, height=600)
+background.place(x=0, y=0, relwidth=1, relheight=1)  # Gunakan place untuk mengisi seluruh area
+root.tk.call("lower", background._w) # Pastikan canvas berada di bawah semua elemen
 
 def logout():
     global current_user
@@ -159,51 +170,45 @@ def show_home():
     theme_combobox.bind("<<ComboboxSelected>>", lambda event: apply_theme(theme_combobox.get()))
 
     ttk.Button(root, text="Ubah Tema", command=lambda: apply_theme(theme_combobox.get())).pack(pady=10)
-    
-def change_theme(event):
-    selected_theme = theme_combobox.get()
-    apply_theme(selected_theme)
 
+# Fungsi untuk menerapkan tema
 def apply_theme(theme):
-    if theme == "Default":
-        root.configure(bg="#f0f0f0")
-        style.configure("TFrame", background="#f0f0f0")
-        style.configure("TLabel", background="#f0f0f0", foreground="black")
-        style.configure("TButton", background="#d9d9d9", foreground="black")
-    elif theme == "Dark Mode":
-        root.configure(bg="#2c2c2c")
-        style.configure("TFrame", background="#2c2c2c")
-        style.configure("TLabel", background="#2c2c2c", foreground="white")
-        style.configure("TButton", background="#444444", foreground="black")
-    elif theme == "Light Mode":
-        root.configure(bg="#ffffff")
-        style.configure("TFrame", background="#ffffff")
-        style.configure("TLabel", background="#ffffff", foreground="black")
-        style.configure("TButton", background="#e0e0e0", foreground="black")
-    elif theme == "Coquette Mode":
-        root.configure(bg="#FDE8E8")
-        style.configure("TFrame", background="#FFF1F1")
-        style.configure("TLabel", background="#FFF1F1", foreground="#8B5E83")
-        style.configure("TButton", background="# FADADD", foreground="black")
-    elif theme == "Earth Mode":
-        root.configure(bg="#D7CCC8")
-        style.configure("TFrame", background="#F5F5F5")
-        style.configure("TLabel", background="#F5F5F5", foreground="#5D4037")
-        style.configure("TButton", background="#A1887F", foreground="black")
-    elif theme == "Sky Mode":
-        root.configure(bg="#BBDEFB")
-        style.configure("TFrame", background="#E3F2FD")
-        style.configure("TLabel", background="#E3F2FD", foreground="#0D47A1")
-        style.configure("TButton", background="#64B5F6", foreground="black")
+    global bg_image  # Simpan referensi gambar latar
+    theme_images = {
+        "Default": "default.jpg",
+        "Dark Mode": "dark_mode.jpeg",
+        "Light Mode": "light_mode.jpg",
+        "Coquette Mode": "coquette_mode.jpg",
+        "Earth Mode": "earth_mode.jpg",
+        "Sky Mode": "sky_mode.jpg",
+    }
 
+    image_path = theme_images.get(theme, "default.jpg")
+    try:
+        bg_image = ImageTk.PhotoImage(Image.open(image_path).resize((800, 600)))
+        background.create_image(0, 0, anchor="nw", image=bg_image)
+        background.image = bg_image  # Simpan referensi gambar untuk mencegah garbage collection
+    except Exception as e:
+        messagebox.showerror("Error", f"Gagal memuat gambar: {e}")
+
+    theme_colors = {
+        "Default": {"fg": "#000", "button_bg": "#4CAF50", "button_fg": "#fff"},
+        "Dark Mode": {"fg": "#333", "button_bg": "#5C6BC0", "button_fg": "#fff"},
+        "Light Mode": {"fg": "#000", "button_bg": "#03A9F4", "button_fg": "#fff"},
+        "Coquette Mode": {"fg": "#3E3E3E", "button_bg": "#E91E63", "button_fg": "#fff"},
+        "Earth Mode": {"fg": "#3E3E3E", "button_bg": "#795548", "button_fg": "#fff"},
+        "Sky Mode": {"fg": "#1A237E", "button_bg": "#1E88E5", "button_fg": "#fff"},
+    }
+
+    colors = theme_colors.get(theme, theme_colors["Default"])
+    style.configure("TLabel", foreground=colors["fg"], font=("Arial", 14))
+    style.configure("TButton", background=colors["button_bg"], foreground=colors["button_fg"], font=("Arial", 12))
+
+    # Refresh frame
     clear_frame()
     show_home()
+    # Perbarui tampilan
     root.update()
-
-# Inisialisasi aplikasi
-root = tk.Tk()
-root.title("Aplikasi Pengelolaan Uang")
-root.geometry("600x400")
 
 # Gaya (Style)
 style = ttk.Style()
@@ -212,4 +217,4 @@ style = ttk.Style()
 show_home()
 
 # Menjalankan aplikasi
-root.mainloop()
+root.mainloop() 
