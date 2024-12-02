@@ -86,21 +86,21 @@ def add_transaction_user():
             messagebox.showerror("Error", "Harap isi semua kolom.")
 
     clear_frame()
-    ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 24)).pack(pady=10)
+    ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 35)).pack(pady=10)
 
-    ttk.Label(root, text="Tipe Transaksi: ", font=("Obra Letra", 18)).pack(pady=5)
+    ttk.Label(root, text="Tipe Transaksi: ").pack(pady=5)
     transaction_type = ttk.Combobox(root, values=["Income", "Expense"])
     transaction_type.pack(pady=5)
 
-    ttk.Label(root, text="Deskripsi:", font=("Obra Letra", 18)).pack(pady=5)
+    ttk.Label(root, text="Deskripsi:").pack(pady=5)
     entry_description = ttk.Entry(root)
     entry_description.pack(pady=5)
 
-    ttk.Label(root, text="Jumlah:", font=("Obra Letra", 18)).pack(pady=5)
+    ttk.Label(root, text="Jumlah:").pack(pady=5)
     entry_amount = ttk.Entry(root)
     entry_amount.pack(pady=5)
 
-    ttk.Label(root, text="Tanggal (YYYY-MM-DD):", font=("Obra Letra", 18)).pack(pady=5)
+    ttk.Label(root, text="Tanggal (YYYY-MM-DD):").pack(pady=5)
     entry_date = ttk.Entry(root)
     entry_date.pack(pady=5)
 
@@ -111,22 +111,24 @@ def add_transaction_user():
 def show_report():
     clear_frame()
 
-    ttk.Label(root, text="Laporan Keuangan", font=("Obra Letra", 30, "bold")).pack(pady=10)
+    ttk.Label(root, text="Laporan Keuangan", font=("Obra Letra", 45)).pack(pady=10)
 
     frame = ttk.Frame(root)
-    frame.pack(pady=10, fill="both", expand=True)
+    frame.pack()
 
     columns = ("type", "description", "amount", "date")
-    tree = ttk.Treeview(frame, columns=columns, show="headings", style="Treeview")
-    for col in columns:
-        tree.heading(col, text=col.capitalize())
-        tree.column(col, anchor="center", width=150)
-    tree.pack(fill="both", expand=True, pady=10)
+    tree = ttk.Treeview(frame, columns=columns, show="headings")
+    tree.heading("type", text="Tipe Transaksi")
+    tree.heading("description", text="Deskripsi")
+    tree.heading("amount", text="Jumlah")
+    tree.heading("date", text="Tanggal")
+    tree.pack(fill="both", expand=True)
 
-    user_transactions = us.get_user_transactions(current_user["username"])
-    for transaction in user_transactions:
+    transactions = ts.get_user_transactions(current_user["username"])  # Memanggil fungsi dari modul transactions
+
+    for transaction in transactions:
         tree.insert("", "end", values=(transaction["type"], transaction["description"], transaction["amount"], transaction["date"]))
-        
+
     ttk.Button(root, text="Kembali", command=show_main_menu).pack(pady=10)
     
 # Fungsi untuk membersihkan frame utama
