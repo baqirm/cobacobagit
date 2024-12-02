@@ -88,19 +88,19 @@ def add_transaction_user():
     clear_frame()
     ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 35)).pack(pady=10)
 
-    ttk.Label(root, text="Tipe Transaksi: ").pack(pady=5)
+    ttk.Label(root, text="Tipe Transaksi: ", font=("Obra Letra", 20)).pack(pady=5)
     transaction_type = ttk.Combobox(root, values=["Income", "Expense"])
     transaction_type.pack(pady=5)
 
-    ttk.Label(root, text="Deskripsi:").pack(pady=5)
+    ttk.Label(root, text="Deskripsi:", font=("Obra Letra", 20)).pack(pady=5)
     entry_description = ttk.Entry(root)
     entry_description.pack(pady=5)
 
-    ttk.Label(root, text="Jumlah:").pack(pady=5)
+    ttk.Label(root, text="Jumlah:", font=("Obra Letra", 35)).pack(pady=5)
     entry_amount = ttk.Entry(root)
     entry_amount.pack(pady=5)
 
-    ttk.Label(root, text="Tanggal (YYYY-MM-DD):").pack(pady=5)
+    ttk.Label(root, text="Tanggal (YYYY-MM-DD):", font=("Obra Letra", 20)).pack(pady=5)
     entry_date = ttk.Entry(root)
     entry_date.pack(pady=5)
 
