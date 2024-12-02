@@ -24,17 +24,17 @@ def sign_up_user():
             messagebox.showerror("Error", "Harap isi semua kolom.")
             
     clear_frame()
-    ttk.Label(root, text="Sign Up", font=("Obra Letra", 26)).pack(pady=10)
+    ttk.Label(root, text="Sign Up", font=("Obra Letra", 40)).pack(pady=10)
 
-    ttk.Label(root, text="Username:", font=("Obra Letra", 20)).pack(pady=7)
+    ttk.Label(root, text="Username:", font=("Obra Letra", 25)).pack(pady=7)
     entry_username = ttk.Entry(root)
     entry_username.pack(pady=5)
 
-    ttk.Label(root, text="Password:", font=("Obra Letra", 20)).pack(pady=7)
+    ttk.Label(root, text="Password:", font=("Obra Letra", 25)).pack(pady=7)
     entry_password = ttk.Entry(root, show="*")
     entry_password.pack(pady=5)
 
-    ttk.Label(root, text="Email:", font=("Obra Letra", 20)).pack(pady=7)
+    ttk.Label(root, text="Email:", font=("Obra Letra", 25)).pack(pady=7)
     entry_email = ttk.Entry(root)
     entry_email.pack(pady=5)
 
@@ -55,12 +55,12 @@ def sign_in_user():
             messagebox.showerror("Error", user)
 
     clear_frame()
-    ttk.Label(root, text="Sign In", font=("Obra Letra", 24)).pack(pady=10)
-    ttk.Label(root, text="Username:", font=("Obra Letra", 20)).pack(pady=7)
+    ttk.Label(root, text="Sign In", font=("Obra Letra", 40)).pack(pady=10)
+    ttk.Label(root, text="Username:", font=("Obra Letra", 25)).pack(pady=7)
     entry_username = ttk.Entry(root)
     entry_username.pack(pady=5)
 
-    ttk.Label(root, text="Password:", font=("Obra Letra", 20)).pack(pady=7)
+    ttk.Label(root, text="Password:", font=("Obra Letra", 25)).pack(pady=7)
     entry_password = ttk.Entry(root, show="*")
     entry_password.pack(pady=5)
     
@@ -86,21 +86,21 @@ def add_transaction_user():
             messagebox.showerror("Error", "Harap isi semua kolom.")
 
     clear_frame()
-    ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 35)).pack(pady=10)
+    ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 40)).pack(pady=10)
 
-    ttk.Label(root, text="Tipe Transaksi: ", font=("Obra Letra", 20)).pack(pady=5)
+    ttk.Label(root, text="Tipe Transaksi: ", font=("Obra Letra", 25)).pack(pady=5)
     transaction_type = ttk.Combobox(root, values=["Income", "Expense"])
     transaction_type.pack(pady=5)
 
-    ttk.Label(root, text="Deskripsi:", font=("Obra Letra", 20)).pack(pady=5)
+    ttk.Label(root, text="Deskripsi:", font=("Obra Letra", 25)).pack(pady=5)
     entry_description = ttk.Entry(root)
     entry_description.pack(pady=5)
 
-    ttk.Label(root, text="Jumlah:", font=("Obra Letra", 35)).pack(pady=5)
+    ttk.Label(root, text="Jumlah:", font=("Obra Letra", 25)).pack(pady=5)
     entry_amount = ttk.Entry(root)
     entry_amount.pack(pady=5)
 
-    ttk.Label(root, text="Tanggal (YYYY-MM-DD):", font=("Obra Letra", 20)).pack(pady=5)
+    ttk.Label(root, text="Tanggal (YYYY-MM-DD):", font=("Obra Letra", 25)).pack(pady=5)
     entry_date = ttk.Entry(root)
     entry_date.pack(pady=5)
 
@@ -165,7 +165,7 @@ def apply_theme(theme):
 
     colors = theme_colors.get(theme, theme_colors["Default"])
     style.configure("TLabel", foreground=colors["label_fg"], font=("Celandine", 50))
-    style.configure("TButton", background=colors["button_bg"], foreground=colors["button_fg"], font=("Obra Letra", 24))
+    style.configure("TButton", background=colors["button_bg"], foreground=colors["button_fg"], font=("Obra Letra", 16))
     global button_style
     button_style = colors
     clear_frame()
