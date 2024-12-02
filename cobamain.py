@@ -177,7 +177,7 @@ def show_main_menu():
 
     ttk.Label(root, text=f"Selamat Datang, {current_user['username']}", font=("Celandine", 52, "bold")).pack(pady=10)
     ttk.Button(root, text="Tambah Transaksi", command=add_transaction_user).pack(pady=5)  # Memanggil add_transaction_user
-    ttk.Button(root, text="Lihat Laporan", command=show_report).pack(pady=5)
+    ttk.Button(root, text="Laporan Saldo", command=show_report).pack(pady=5)
     ttk.Button(root, text="Logout", command=logout).pack(pady=5)
 
 # Fungsi untuk home
