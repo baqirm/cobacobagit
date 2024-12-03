@@ -8,3 +8,8 @@ id,username,type,description,amount,date
 7,anggrek,Income,gaji,5000000.0,2024-12-02
 8,jaemin,Income,gaji,10000000.0,2024-12-02
 9,jaemin,Expense,jajan,20000.0,2024-12-02
+10,jaemin,Expense,minum,23.0,2024-12-03
+11,mark,Income,Gaji,20000000.0,2024-12-03
+12,mark,Expense,jajan,50.0,2024-12-03
+13,mark,Expense,makan,40.0,2024-12-4
+14,jaemin,Expense,makan,500000.0,2024-12-05

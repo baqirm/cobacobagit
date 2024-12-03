@@ -84,6 +84,7 @@ def add_transaction_user():
                 messagebox.showerror("Error", "Jumlah harus berupa angka.")
         else:
             messagebox.showerror("Error", "Harap isi semua kolom.")
+            
 
     clear_frame()
     ttk.Label(root, text="Tambah Transaksi", font=("Obra Letra", 40)).pack(pady=10)
@@ -115,6 +116,11 @@ def show_report():
 
     frame = ttk.Frame(root)
     frame.pack()
+    
+    # Membuat style untuk Treeview
+    style = ttk.Style()
+    style.configure("Treeview", font=("Times New Roman", 12))  # Ganti ukuran font di sini
+    style.configure("Treeview.Heading", font=("Times New Roman", 18))  # Ganti ukuran font heading di sini
 
     columns = ("type", "description", "amount", "date")
     tree = ttk.Treeview(frame, columns=columns, show="headings")
@@ -129,7 +135,28 @@ def show_report():
     for transaction in transactions:
         tree.insert("", "end", values=(transaction["type"], transaction["description"], transaction["amount"], transaction["date"]))
 
-    ttk.Button(root, text="Kembali", command=show_main_menu).pack(pady=10)
+    # Menghitung dan menampilkan saldo
+    total_income, total_expense, total_balance = ts.get_user_balance(current_user["username"])  # Memanggil fungsi dari modul transactions
+   
+    # Format total_income, total_expense, dan total_balance
+    formatted_income = f"{total_income:,.0f}".replace(',', '.')
+    formatted_expense = f"{total_expense:,.0f}".replace(',', '.')
+    formatted_balance = f"{total_balance:,.0f}".replace(',', '.')
+   
+    # Validasi total_balance
+    if total_balance is None:
+        ttk.Label(frame, text="Kesalahan: Total saldo tidak ditemukan.", foreground="red").pack(pady=10)
+    elif not isinstance(total_balance, (int, float)):
+        ttk.Label(frame, text="Kesalahan: Total saldo tidak valid.", foreground="red").pack(pady=10)
+    elif total_balance < 0:
+        ttk.Label(frame, text="Peringatan: Saldo negatif.", foreground="orange").pack(pady=10)
+    else:
+        # Tampilkan total income, expense, dan balance dengan format yang diinginkan
+        ttk.Label(frame, text=f"Total Pemasukan: {formatted_income}", font=("Times New Roman", 16, "bold"), foreground="green").pack(pady=10)
+        ttk.Label(frame, text=f"Total Pengeluaran: {formatted_expense}", font=("Times New Roman", 16, "bold"), foreground="purple").pack(pady=10)
+        ttk.Label(frame, text=f"Saldo Akhir: {formatted_balance}", font=("Times New Roman", 16, "bold"), foreground="blue").pack(pady=10)
+  
+    ttk.Button(frame, text="Kembali", command=show_main_menu).pack(pady=10)
     
 # Fungsi untuk membersihkan frame utama
 def clear_frame():
