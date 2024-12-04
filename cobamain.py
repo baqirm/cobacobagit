@@ -120,7 +120,7 @@ def show_report():
     # Membuat style untuk Treeview
     style = ttk.Style()
     style.configure("Treeview", font=("Times New Roman", 12))  # Ganti ukuran font di sini
-    style.configure("Treeview.Heading", font=("Times New Roman", 18))  # Ganti ukuran font heading di sini
+    style.configure("Treeview.Heading", font=("Times New Roman", 18, "bold"), foreground="blue")  # Ganti ukuran font heading di sini
 
     columns = ("type", "description", "amount", "date")
     tree = ttk.Treeview(frame, columns=columns, show="headings")
@@ -145,16 +145,16 @@ def show_report():
    
     # Validasi total_balance
     if total_balance is None:
-        ttk.Label(frame, text="Kesalahan: Total saldo tidak ditemukan.", foreground="red").pack(pady=10)
+        ttk.Label(frame, text="Kesalahan: Total saldo tidak ditemukan.", foreground="orange").pack(pady=10)
     elif not isinstance(total_balance, (int, float)):
-        ttk.Label(frame, text="Kesalahan: Total saldo tidak valid.", foreground="red").pack(pady=10)
+        ttk.Label(frame, text="Kesalahan: Total saldo tidak valid.", foreground="orange").pack(pady=10)
     elif total_balance < 0:
-        ttk.Label(frame, text="Peringatan: Saldo negatif.", foreground="orange").pack(pady=10)
+        ttk.Label(frame, text="Peringatan: Saldo negatif.", foreground="red").pack(pady=10)
     else:
         # Tampilkan total income, expense, dan balance dengan format yang diinginkan
         ttk.Label(frame, text=f"Total Pemasukan: {formatted_income}", font=("Times New Roman", 16, "bold"), foreground="green").pack(pady=10)
         ttk.Label(frame, text=f"Total Pengeluaran: {formatted_expense}", font=("Times New Roman", 16, "bold"), foreground="purple").pack(pady=10)
-        ttk.Label(frame, text=f"Saldo Akhir: {formatted_balance}", font=("Times New Roman", 16, "bold"), foreground="blue").pack(pady=10)
+        ttk.Label(frame, text=f"Saldo Akhir: {formatted_balance}", font=("Times New Roman", 16, "bold"), foreground="brown").pack(pady=10)
   
     ttk.Button(frame, text="Kembali", command=show_main_menu).pack(pady=10)
     

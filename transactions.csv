@@ -13,3 +13,5 @@ id,username,type,description,amount,date
 12,mark,Expense,jajan,50.0,2024-12-03
 13,mark,Expense,makan,40.0,2024-12-4
 14,jaemin,Expense,makan,500000.0,2024-12-05
+15,jaemin,Expense,jajan,20000000.0,2024-12-04
+16,jaemin,Income,kerja,45000000.0,2024-12-04
