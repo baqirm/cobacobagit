@@ -17,7 +17,11 @@ initialize_transaction_file()
 def read_transactions():
     with open(TRANSACTION_FILE, mode="r") as file:
         reader = csv.DictReader(file)
-        return list(reader)  # Mengembalikan list transaksi
+        transactions = list(reader)  # Mengembalikan list transaksi
+        # Konversi amount ke float
+        for transaction in transactions:
+            transaction["amount"] = float(transaction["amount"])  # Konversi amount ke float
+        return transactions
 
 def write_transactions(transactions):
     with open(TRANSACTION_FILE, mode="w", newline="") as file:
@@ -28,6 +32,11 @@ def write_transactions(transactions):
 def add_transaction(username, t_type, description, amount, date):
     transactions = read_transactions()  # Membaca transaksi yang ada
     transaction_id = len(transactions) + 1  # Menghitung ID transaksi baru
+    try:
+        amount = float(amount)  # Pastikan amount adalah float
+    except ValueError:
+        raise ValueError("Jumlah harus berupa angka.")
+    
     transactions.append({
         "id": transaction_id,
         "username": username,
@@ -48,7 +57,7 @@ def get_user_balance(username):
     total_expense = 0
 
     for transaction in transactions:
-        amount =float(transaction["amount"])
+        amount = transaction["amount"]
         if transaction["type"] == "Income":
             total_income += amount
         elif transaction["type"] == "Expense":

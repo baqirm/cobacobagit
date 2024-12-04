@@ -3,12 +3,12 @@ from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 import users as us
 import transactions as ts
-     
+
 def logout():
     global current_user
     current_user = None
     messagebox.showinfo("Logout", "Anda berhasil logout")
-    show_home()
+    show_home()    
 
 def sign_up_user():
     def submit_signup():
@@ -76,7 +76,7 @@ def add_transaction_user():
 
         if t_type and description and amount and date:
             try:
-                amount = float(amount)
+                amount = (amount.replace('.', '').replace(',', ''))
                 ts.add_transaction(current_user["username"], t_type, description, amount, date)
                 messagebox.showinfo("Success", "Transaksi berhasil disimpan.")
                 show_main_menu()
@@ -116,11 +116,11 @@ def show_report():
 
     frame = ttk.Frame(root)
     frame.pack()
-    
+
     # Membuat style untuk Treeview
     style = ttk.Style()
-    style.configure("Treeview", font=("Times New Roman", 12))  # Ganti ukuran font di sini
-    style.configure("Treeview.Heading", font=("Times New Roman", 18, "bold"), foreground="blue")  # Ganti ukuran font heading di sini
+    style.configure("Treeview", font=("Times New Roman", 14))
+    style.configure("Treeview.Heading", font=("Times New Roman", 18, "bold"), foreground="blue")
 
     columns = ("type", "description", "amount", "date")
     tree = ttk.Treeview(frame, columns=columns, show="headings")
@@ -130,33 +130,30 @@ def show_report():
     tree.heading("date", text="Tanggal")
     tree.pack(fill="both", expand=True)
 
-    transactions = ts.get_user_transactions(current_user["username"])  # Memanggil fungsi dari modul transactions
+    transactions = ts.get_user_transactions(current_user["username"])
 
     for transaction in transactions:
-        tree.insert("", "end", values=(transaction["type"], transaction["description"], transaction["amount"], transaction["date"]))
+        formatted_amount = f"{float(transaction['amount']):,.0f}".replace(',', '.')
+        tree.insert("", "end", values=(transaction["type"], transaction["description"], formatted_amount, transaction["date"]))
 
     # Menghitung dan menampilkan saldo
-    total_income, total_expense, total_balance = ts.get_user_balance(current_user["username"])  # Memanggil fungsi dari modul transactions
-   
-    # Format total_income, total_expense, dan total_balance
+    total_income, total_expense, total_balance = ts.get_user_balance(current_user["username"])
+    print(f"Total Income: {total_income}, Total Expense: {total_expense}, Total Balance: {total_balance}")  # Debugging
+
     formatted_income = f"{total_income:,.0f}".replace(',', '.')
     formatted_expense = f"{total_expense:,.0f}".replace(',', '.')
     formatted_balance = f"{total_balance:,.0f}".replace(',', '.')
-   
-    # Validasi total_balance
+
     if total_balance is None:
         ttk.Label(frame, text="Kesalahan: Total saldo tidak ditemukan.", foreground="orange").pack(pady=10)
     elif not isinstance(total_balance, (int, float)):
         ttk.Label(frame, text="Kesalahan: Total saldo tidak valid.", foreground="orange").pack(pady=10)
-    elif total_balance < 0:
-        ttk.Label(frame, text="Peringatan: Saldo negatif.", foreground="red").pack(pady=10)
     else:
-        # Tampilkan total income, expense, dan balance dengan format yang diinginkan
-        ttk.Label(frame, text=f"Total Pemasukan: {formatted_income}", font=("Times New Roman", 16, "bold"), foreground="green").pack(pady=10)
+        ttk.Label(frame, text=f"Total Pendapatan: {formatted_income}", font=("Times New Roman", 16, "bold"), foreground="green").pack(pady=10)
         ttk.Label(frame, text=f"Total Pengeluaran: {formatted_expense}", font=("Times New Roman", 16, "bold"), foreground="purple").pack(pady=10)
         ttk.Label(frame, text=f"Saldo Akhir: {formatted_balance}", font=("Times New Roman", 16, "bold"), foreground="brown").pack(pady=10)
-  
-    ttk.Button(frame, text="Kembali", command=show_main_menu).pack(pady=10)
+
+    ttk.Button(root, text="Kembali", command=show_main_menu).pack(pady=10)
     
 # Fungsi untuk membersihkan frame utama
 def clear_frame():
@@ -201,7 +198,6 @@ def apply_theme(theme):
 # Menu utama
 def show_main_menu():
     clear_frame()
-
     ttk.Label(root, text=f"Selamat Datang, {current_user['username']}", font=("Celandine", 52, "bold")).pack(pady=10)
     ttk.Button(root, text="Tambah Transaksi", command=add_transaction_user).pack(pady=5)  # Memanggil add_transaction_user
     ttk.Button(root, text="Laporan Saldo", command=show_report).pack(pady=5)
