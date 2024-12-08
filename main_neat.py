@@ -9,7 +9,7 @@ current_user = None
 # Inisialisasi aplikasi
 root = tk.Tk()
 root.title("Aplikasi Pengelolaan Uang")
-root.geometry("800x600")  # Sesuaikan ukuran jendela
+root.geometry("800x600")  
 
 # Membuat Canvas untuk gambar latar
 background = tk.Canvas(root, width=800, height=600)
